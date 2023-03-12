@@ -1,103 +1,128 @@
-﻿/*
-Напишите цикл, который принимает на вход два числа (A и B) и возводит число A в натуральную степень B.
-3, 5 -> 243 (3⁵)
-2, 4 -> 16
+﻿/* Задача 34: Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, 
+которая покажет количество чётных чисел в массиве.
+[345, 897, 568, 234] -> 2
 */
 
-int numberA = ReadInt("Введите число A: ");
-int numberB = ReadInt("Введите число B: ");
-ToDegree(numberA, numberB);
+
+Console.WriteLine("Введите размер массива");
+int size = Convert.ToInt32(Console.ReadLine());
+int[] numbers = new int[size];
+int count = 0;
+FillArrayRandomNumbers(numbers);
+PrintArray(numbers);
 
 
-// Функция возведения в степень
-void ToDegree(int a, int b)
+for (int i = 0; i < numbers.Length; i++)
 {
-    int result = 1;
-    for (int i = 1; i <= b; i++)
+    if (numbers[i] % 2 == 0)
+    count++;
+}
+
+
+Console.WriteLine($"количество чётных чисел в массиве -> {count} ");
+
+void FillArrayRandomNumbers(int[] array)
+{
+    for(int i = 0; i < array.Length; i++)
     {
-        result = result * a;
+        array[i] = new Random().Next(100,1000);
     }
-    Console.WriteLine(result);
 }
-
-// Функция ввода
-int ReadInt(string message)
+void PrintArray(int[] array)
 {
-    Console.WriteLine(message);
-    return Convert.ToInt32(Console.ReadLine());
+    for(int i = 0; i < array.Length; i++)
+    {
+        Console.Write(array[i] + " ");
+    }
+    Console.WriteLine();
 }
 
+/*
+Задача 36: Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных позициях.
+[3, 7, 23, 12] -> 19
+[-4, -6, 89, 6] -> 0
+*/
+
+
+int size = 4;
+int[] numbers = new int[size];
+FillArrayRandomNumbers(numbers);
+PrintArray(numbers);
+
+int sumNumbersEvenIndex = 0;
+
+for (int i = 1; i < numbers.Length; i += 2)
+{
+    sumNumbersEvenIndex += numbers[i];
+}
+Console.Write(sumNumbersEvenIndex);
+
+
+
+void FillArrayRandomNumbers(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        array[i] = new Random().Next(-100, 101);
+    }
+}
+
+void PrintArray(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        Console.Write(array[i] + " ");
+    }
+    Console.WriteLine();
+}
 
 
 
 /*
-Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
-452 -> 11
-82 -> 10
-9012 -> 12
+Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементами массива.
+[3 7 22 2 78] -> 76
 */
 
-int number = ReadInt("Введите число: ");
-int len = NumberLen(number);
-SumNumbers(number, len);
+int size = 10;
+int[] numbers = new int[size];
+FillArrayRandomNumbers(numbers);
+PrintArray(numbers);
 
+int max = numbers[0];
+int min = numbers[0];
 
-// Функция ввода
-int ReadInt(string message)
+for (int i = 0; i < numbers.Length; i++)
 {
-    Console.Write(message);
-    return Convert.ToInt32(Console.ReadLine());
-}
-
-// Функция подсчета цифр в числе
-int NumberLen(int a)
-{
-    int index = 0;
-    while (a > 0)
+    if (numbers[i] > max)
     {
-        a /= 10;
-        index++;
+        max = numbers[i];
     }
-    return index;
-}
-
-// Функция вывода суммы цифр в числе
-void SumNumbers(int n, int len)
-{
-    int sum = 0;
-    for (int i = 1; i <= len; i++)
+    else if (numbers[i] < min)
     {
-        sum += n % 10;
-        n /= 10;
+        min = numbers[i];
     }
-    Console.WriteLine(sum);
+}
+
+Console.WriteLine($"Минимальное число: {min}");
+Console.WriteLine($"Минимальное число: {max}");
+Console.WriteLine($"Разница между максимальным и минимальным числами: {max-min}");
+
+
+
+void FillArrayRandomNumbers(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        array[i] = new Random().Next(1, 555);
+    }
 }
 
 
-
-
-
-
-
-/*
-Напишите программу, которая задаёт массив из N элементов и выводит их на экран.
-5 -> [1, 2, 5, 7, 19]
-3 -> [6, 1, 33]
-*/
-
-int lenArray = ReadInt("Введите длинну массива: ");
-
-int[] randomArray = new int[lenArray];
-for (int i = 0; i < randomArray.Length; i++)
+void PrintArray(int[] array)
 {
-    randomArray[i] = new Random().Next(1,9);
-    Console.Write(randomArray[i] + " ");
-}
-
-
-// Функция ввода
-int ReadInt(string message)
-{
-    Console.Write(message);
-    return Convert.ToInt32(Console.ReadLine());
+    for (int i = 0; i < array.Length; i++)
+    {
+        Console.Write(array[i] + " ");
+    }
+    Console.WriteLine();
 }
